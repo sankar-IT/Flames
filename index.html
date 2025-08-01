@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="favicon.png" type="image/png" />
+  <title>FLAMES Love Compatibility</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #ff6a88, #ff99ac);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 16px;
+      padding: 30px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+
+    .container h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 36px;
+      color: #ff3366;
+      margin-bottom: 10px;
+    }
+
+    .sub-heading {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      border: 2px solid #eee;
+      border-radius: 10px;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+
+    input:focus {
+      border-color: #ff3366;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #ff3366;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e42e5a;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    .flames-meanings {
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .flames-meanings h3 {
+      font-size: 20px;
+      color: #ff3366;
+      margin-bottom: 10px;
+      border-bottom: 2px dashed #ff99ac;
+      padding-bottom: 5px;
+    }
+
+    .flames-meanings ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .flames-meanings li {
+      margin: 8px 0;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .flames-meanings span {
+      font-weight: bold;
+      color: #ff3366;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>FLAMES</h1>
+    <p class="sub-heading">Find your relationship status ❤️</p>
+
+    <input type="text" id="name1" placeholder="Enter your name">
+    <input type="text" id="name2" placeholder="Enter their name">
+
+    <button onclick="checkFlames()">Check Compatibility</button>
+    <button style="margin-top: 5px;" onclick="clearFlames()">clear</button>
+
+    <div class="result" id="result"> </div>
+
+    <div class="flames-meanings">
+      <h3>FLAMES Meaning:</h3>
+      <ul>
+        <li><span>F</span> – Friends 👬</li>
+        <li><span>L</span> – Love ❤️</li>
+        <li><span>A</span> – Affection 💖</li>
+        <li><span>M</span> – Marriage 💍</li>
+        <li><span>E</span> – Enemy 😡</li>
+        <li><span>S</span> – Sibling 👧👦</li>
+      </ul>
+    </div>
+  </div>
+<script>
+  function checkFlames(){
+  let firstName=document.getElementById('name1').value.toLowerCase().replace(/\s/g, '');
+  let secondName=document.getElementById('name2').value.toLowerCase().replace(/\s/g,'');
+
+  if(!firstName || !secondName){
+    Swal.fire({
+      title:'please enter both names',
+      icon:'alert'
+    })
+    return
+  }
+
+  for(let i=0;i<firstName.length;i++){
+    let match=firstName[i];
+
+    if(secondName.includes(match)){
+      firstName=firstName.replace(match,'')
+      secondName=secondName.replace(match,'');
+      i--;
+    }
+  }
+
+  let count=firstName.length + secondName.length;
+let matching = ['Friends', 'Love', 'Affection', 'Marriage', 'Enemy', 'Siblings'];
+  let index=0;
+
+ while(matching.length>1){
+    index=(index+count-1)%matching.length;
+    matching.splice(index,1)
+  }
+  document.getElementById('result').textContent=`the result is : ${matching[0]}`
+  }
+
+
+  function clearFlames(){
+    document.getElementById('name1').value='';
+    document.getElementById('name2').value='';
+    document.getElementById('result').textContent='';
+  }
+</script>
+</body>
+</html>  
